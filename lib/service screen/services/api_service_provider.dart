@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:teleradiology/Constants/snackbar.dart';
 import 'package:teleradiology/Services/shared_preference_service.dart';
 import 'package:teleradiology/service%20screen/service_change_password.dart';
+import 'package:teleradiology/service%20screen/service_mainscreen.dart';
 import 'package:teleradiology/service%20screen/service_sign_in_page.dart';
 import 'package:teleradiology/service%20screen/service_verify_otp.dart';
 
@@ -123,6 +124,34 @@ Future serviceChangePassword(data) async {
         showCustomSnackBar(resdata["msg"]);
       }
     }
+  } catch (e) {
+    print(e.toString());
+    showCustomSnackBar("Server Error");
+  }
+}
+
+Future serviceSignIn(Map data) async {
+  try {
+    final response = await http.post(Uri.parse('$baseUrl/login'),
+        headers: {
+          "Content-Type": "application/json",
+          'Accept': 'application/json',
+        },
+        body: json.encode(data),
+        encoding: Encoding.getByName('utf-8'));
+
+    if (response.statusCode == 200) {
+      var resdata = jsonDecode(response.body);
+      print(resdata);
+      if (resdata["status"]) {
+        await setlogin(true);
+        Get.to(ServiceMainScreen());
+      } else {
+        print("false");
+      }
+    }
+  } on TimeoutException {
+    showCustomSnackBar("Connection Time Out!");
   } catch (e) {
     print(e.toString());
     showCustomSnackBar("Server Error");

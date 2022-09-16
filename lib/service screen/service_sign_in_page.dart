@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
+import 'package:teleradiology/Constants/snackbar.dart';
 import 'service_forgot_password.dart';
 import 'service_sign_up_page.dart';
+import 'services/api_service_provider.dart';
 
 class ServiceSignInPage extends StatefulWidget {
   const ServiceSignInPage({Key? key}) : super(key: key);
@@ -13,7 +16,7 @@ class ServiceSignInPage extends StatefulWidget {
 }
 
 class _ServiceSignInPageState extends State<ServiceSignInPage> {
-  TextEditingController userController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool hidePassword = true;
   bool selectedItem = true;
@@ -57,19 +60,13 @@ class _ServiceSignInPageState extends State<ServiceSignInPage> {
                   child: TextFormField(
                     cursorColor: teleGray,
                     enabled: selectedItem,
-                    controller: userController,
+                    controller: emailController,
                     decoration: InputDecoration(
-                        prefixIcon: selectedItem
-                            ? Icon(
-                                Icons.person,
-                                color: teleGray,
-                              )
-                            : Icon(
-                                Icons.person,
-                                color: teleBlack,
-                              ),
-                        hintText:
-                            "Service Provider/Hospital/Health System/OP Facility",
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: teleBlack,
+                        ),
+                        hintText: "Email",
                         hintStyle: TextStyle(
                             fontSize: 13,
                             color: teleGray,
@@ -139,7 +136,23 @@ class _ServiceSignInPageState extends State<ServiceSignInPage> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(ServiceSignUpPage());
+                    var email = emailController.text;
+                    var password = passwordController.text;
+                    if (email.isEmpty) {
+                      showCustomSnackBar('Enter Your Email');
+                    } else if (password.isEmpty) {
+                      showCustomSnackBar('Enter Your Password');
+                    } else {
+                      Map data = {
+                        "email": email,
+                        "password": password,
+                      };
+                      EasyLoading.show();
+                      serviceSignIn(data).whenComplete(() {
+                        EasyLoading.removeAllCallbacks();
+                        EasyLoading.dismiss();
+                      });
+                    }
                   },
                   child: Padding(
                     padding: EdgeInsets.only(
