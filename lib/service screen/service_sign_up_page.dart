@@ -275,6 +275,8 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
                         right: ScaleController.W * 0.05),
                     child: InkWell(
                       onTap: () {
+                        EasyLoading.show();
+
                         if (formkey.currentState!.validate()) {
                           var name = userController.text;
                           var email = emailController.text;
