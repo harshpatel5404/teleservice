@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
-import '../service_mainscreen.dart';
+import 'service_mainscreen.dart';
 
 class ServiceResetPassword extends StatefulWidget {
   const ServiceResetPassword({Key? key}) : super(key: key);

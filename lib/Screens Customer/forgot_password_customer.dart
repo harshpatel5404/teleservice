@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
-import 'package:teleradiology/Screens%20Customer/Verify%20OTP%20Customer/verify_otp_customer.dart';
+import 'package:teleradiology/Screens%20Customer/verify_otp_customer.dart';
 
 class ForgotPasswordCustomer extends StatefulWidget {
   const ForgotPasswordCustomer({Key? key}) : super(key: key);

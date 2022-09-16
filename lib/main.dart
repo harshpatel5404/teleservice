@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
-import 'package:teleradiology/Splash%20Screen/splashscreen.dart';
+import 'package:teleradiology/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());

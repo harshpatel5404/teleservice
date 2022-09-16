@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:teleradiology/Constants/snackbar.dart';
 import 'package:teleradiology/Services/shared_preference_service.dart';
 
-var baseUrl = "https://mydevfactory.com/~saikat8/teleradiology";
+var baseUrl = "https://mydevfactory.com/~saikat8/teleradiology/api";
 Future signup(name, email, phone, password) async {
   // bool? isCustomer = await getIscustomer();
   try {

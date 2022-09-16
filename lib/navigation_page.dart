@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
-import 'package:teleradiology/Screens%20Customer/Sign%20In%20Customer/sign_in_page_customer.dart';
-import 'package:teleradiology/service%20screen/Sign%20In/service_sign_in_page.dart';
+import 'package:teleradiology/Screens%20Customer/sign_in_page_customer.dart';
+import 'package:teleradiology/service%20screen/service_sign_in_page.dart';
 
 import 'Services/shared_preference_service.dart';
 

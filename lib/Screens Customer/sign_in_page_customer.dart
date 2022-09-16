@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:teleradiology/Screens%20Customer/Forgot%20Password%20Customer/forgot_password_customer.dart';
-import 'package:teleradiology/Screens%20Customer/HomePage%20Customer/homepage_main_customer.dart';
-import 'package:teleradiology/Screens%20Customer/Sign%20Up%20Customer/sign_up_page_customer.dart';
-import '../../Constants/colors_customer.dart';
-import '../../Constants/dimensions.dart';
+import 'package:teleradiology/Screens%20Customer/forgot_password_customer.dart';
+import 'package:teleradiology/Screens%20Customer/homepage_main_customer.dart';
+import 'package:teleradiology/Screens%20Customer/sign_up_page_customer.dart';
+import '../Constants/colors_customer.dart';
+import '../Constants/dimensions.dart';
 
 class SignInPageCustomer extends StatefulWidget {
   const SignInPageCustomer({Key? key}) : super(key: key);

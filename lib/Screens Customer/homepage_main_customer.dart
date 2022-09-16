@@ -3,16 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
-import 'package:teleradiology/Screens Customer/HomePage Customer/homepage_customer.dart';
-import 'package:teleradiology/Screens%20Customer/About%20Us%20Customer/about_us_customer.dart';
-import 'package:teleradiology/Screens%20Customer/Create%20Profile%20Customer/create_profile_content.dart';
-import 'package:teleradiology/Screens%20Customer/Create%20Profile%20Customer/create_profile_customer.dart';
-import 'package:teleradiology/Screens%20Customer/My%20Cart%20Customer/my_cart.dart';
-import 'package:teleradiology/Screens%20Customer/Payment%20Customer/payment_customer.dart';
-import 'package:teleradiology/Screens%20Customer/Profile%20Customer/profile_customer.dart';
-import 'package:teleradiology/Screens%20Customer/Sign%20In%20Customer/sign_in_page_customer.dart';
-import 'package:teleradiology/Screens%20Customer/Terms%20And%20Condition%20Customer/terms_and_condition.dart';
-import 'package:teleradiology/Screens%20Customer/Training%20Customer/training_customer.dart';
+import 'package:teleradiology/Screens%20Customer/homepage_customer.dart';
+import 'package:teleradiology/Screens%20Customer/about_us_customer.dart';
+import 'package:teleradiology/Screens%20Customer/create_profile_content.dart';
+import 'package:teleradiology/Screens%20Customer/create_profile_customer.dart';
+import 'package:teleradiology/Screens%20Customer/my_cart.dart';
+import 'package:teleradiology/Screens%20Customer/payment_customer.dart';
+import 'package:teleradiology/Screens%20Customer/profile_customer.dart';
+import 'package:teleradiology/Screens%20Customer/sign_in_page_customer.dart';
+import 'package:teleradiology/Screens%20Customer/terms_and_condition.dart';
+import 'package:teleradiology/Screens%20Customer/training_customer.dart';
 
 
 

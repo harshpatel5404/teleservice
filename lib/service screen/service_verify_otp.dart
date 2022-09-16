@@ -5,7 +5,7 @@ import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:teleradiology/Constants/servicecolors.dart';
 
-import '../Forgot Password/service_reset_password.dart';
+import 'service_reset_password.dart';
 
 class ServiceVerifyOTP extends StatefulWidget {
   const ServiceVerifyOTP({Key? key}) : super(key: key);

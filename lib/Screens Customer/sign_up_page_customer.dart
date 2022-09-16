@@ -3,7 +3,7 @@ import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Screens%20Customer/Services/api_services.dart';
-import 'package:teleradiology/Screens%20Customer/Sign%20In%20Customer/sign_in_page_customer.dart';
+import 'package:teleradiology/Screens%20Customer/sign_in_page_customer.dart';
 
 class SignUpPageCustomer extends StatefulWidget {
   const SignUpPageCustomer({Key? key}) : super(key: key);

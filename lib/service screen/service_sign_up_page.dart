@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
-import 'package:teleradiology/service%20screen/Forgot%20Password/service_forgot_password.dart';
-import '../Sign In/service_sign_in_page.dart';
+import 'package:teleradiology/service%20screen/service_forgot_password.dart';
+import 'service_sign_in_page.dart';
 
 class ServiceSignUpPage extends StatefulWidget {
   const ServiceSignUpPage({Key? key}) : super(key: key);

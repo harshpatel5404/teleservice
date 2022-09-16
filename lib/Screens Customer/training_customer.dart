@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
-import 'package:teleradiology/Screens%20Customer/Training%20Customer/trainingdetails.dart';
+import 'package:teleradiology/Screens%20Customer/trainingdetails.dart';
 
 class TrainingCustomer extends StatefulWidget {
   const TrainingCustomer({Key? key}) : super(key: key);

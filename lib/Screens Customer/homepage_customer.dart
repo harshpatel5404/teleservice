@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
-import 'package:teleradiology/Screens%20Customer/Rent%20Now%20Customer/rent_now_customer.dart';
+import 'package:teleradiology/Screens%20Customer/rent_now_customer.dart';
 
 class HomePageMainCustomer extends StatefulWidget {
   const HomePageMainCustomer({Key? key}) : super(key: key);

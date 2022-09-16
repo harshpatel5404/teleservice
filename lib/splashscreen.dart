@@ -5,7 +5,7 @@ import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/navigation_page.dart';
-import 'package:teleradiology/Screens%20Customer/Sign%20In%20Customer/sign_in_page_customer.dart';
+import 'package:teleradiology/Screens%20Customer/sign_in_page_customer.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

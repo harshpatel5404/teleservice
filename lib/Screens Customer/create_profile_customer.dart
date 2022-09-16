@@ -3,10 +3,10 @@ import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
-import 'package:teleradiology/Screens%20Customer/Create%20Profile%20Customer/create_profile_content.dart';
-import 'package:teleradiology/Screens%20Customer/HomePage%20Customer/homepage_customer.dart';
-import 'package:teleradiology/Screens%20Customer/My%20Cart%20Customer/my_cart.dart';
-import 'package:teleradiology/Screens%20Customer/Training%20Customer/training_customer.dart';
+import 'package:teleradiology/Screens%20Customer/create_profile_content.dart';
+import 'package:teleradiology/Screens%20Customer/homepage_customer.dart';
+import 'package:teleradiology/Screens%20Customer/my_cart.dart';
+import 'package:teleradiology/Screens%20Customer/training_customer.dart';
 
 class CreateProfileCustomer extends StatefulWidget {
   const CreateProfileCustomer({Key? key}) : super(key: key);

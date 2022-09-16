@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
-import 'package:teleradiology/Screens%20Customer/Rent%20Details/rentdetails.dart';
+import 'package:teleradiology/Screens%20Customer/rentdetails.dart';
 
 class RentNow extends StatefulWidget {
   const RentNow({Key? key}) : super(key: key);
