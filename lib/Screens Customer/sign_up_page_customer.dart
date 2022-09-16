@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
   bool selectedItem = true;
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
           backgroundColor: backgroundBlue,
@@ -43,13 +45,15 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                     SizedBox(
                       height: ScaleController.H * 0.02,
                     ),
-                    Text(
-                      "Sign Up",
+                    Center(
+                        child: Text(
+                      "Customer Sign Up",
                       style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: "NunitoSans-Bold",
-                          color: teleBlue),
-                    ),
+                          fontFamily: "NunitoSans",
+                          color: teleBlue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                    )),
                     SizedBox(
                       height: ScaleController.H * 0.05,
                     ),
@@ -316,7 +320,11 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                                 "user_type": 3
                               };
 
-                              signup(data).whenComplete(() {});
+                              EasyLoading.show();
+                              signup(data).whenComplete(() {
+                              });
+                                EasyLoading.removeAllCallbacks();
+                                EasyLoading.dismiss();
                             }
                           }
                         },

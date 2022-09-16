@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/snackbar.dart';
 import 'package:teleradiology/service%20screen/service_forgot_password.dart';
+import '../Constants/loader.dart';
 import 'service_sign_in_page.dart';
 import 'services/api_service_provider.dart';
 
@@ -48,6 +50,15 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
                   SizedBox(
                     height: ScaleController.H * 0.02,
                   ),
+                  Center(
+                      child: Text(
+                    "Service Provider Sign Up",
+                    style: TextStyle(
+                        fontFamily: "NunitoSans",
+                        color: teleBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  )),
                   SizedBox(
                     height: ScaleController.H * 0.05,
                   ),
@@ -308,8 +319,11 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
                               "confirm_password": confirm,
                               "user_type": 4
                             };
-
-                            signup(data).whenComplete(() {});
+                            EasyLoading.show();
+                            signup(data).whenComplete(() {
+                              EasyLoading.removeAllCallbacks();
+                              EasyLoading.dismiss();
+                            });
                           }
                         }
                       },

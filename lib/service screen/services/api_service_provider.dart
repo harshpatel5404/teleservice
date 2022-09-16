@@ -4,7 +4,8 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:teleradiology/Constants/snackbar.dart'; 
+import 'package:teleradiology/Constants/snackbar.dart';
+import 'package:teleradiology/service%20screen/service_verify_otp.dart';
 
 var baseUrl = "https://mydevfactory.com/~saikat8/teleradiology/api";
 Future signup(Map data) async {
@@ -21,6 +22,7 @@ Future signup(Map data) async {
       var resdata = jsonDecode(response.body);
       print(resdata);
       if (resdata["status"]) {
+        Get.to(ServiceVerifyOTP());
       } else {
         var error = resdata["data"]["email"] ?? resdata["data"]["phone"];
         showCustomSnackBar(error[0]);

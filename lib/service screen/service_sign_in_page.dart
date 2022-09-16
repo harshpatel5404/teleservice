@@ -38,6 +38,15 @@ class _ServiceSignInPageState extends State<ServiceSignInPage> {
                 SizedBox(
                   height: ScaleController.H * 0.02,
                 ),
+                Center(
+                    child: Text(
+                  "Service Provider Sign In",
+                  style: TextStyle(
+                      fontFamily: "NunitoSans",
+                      color: teleBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14),
+                )),
                 SizedBox(
                   height: ScaleController.H * 0.05,
                 ),

@@ -36,13 +36,15 @@ class _SignInPageCustomerState extends State<SignInPageCustomer> {
                   SizedBox(
                     height: ScaleController.H * 0.02,
                   ),
-                  Text(
-                    "Sign in",
+                  Center(
+                      child: Text(
+                    "Customer Sign In",
                     style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: "NunitoSans-Bold",
-                        color: teleBlue),
-                  ),
+                        fontFamily: "NunitoSans",
+                        color: teleBlue,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14),
+                  )),
                   SizedBox(
                     height: ScaleController.H * 0.05,
                   ),
