@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
+import 'package:teleradiology/Constants/colors_customer.dart'; 
 import 'package:teleradiology/splashscreen.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Teleradiology',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'NunitoSans-Regular'
       ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),

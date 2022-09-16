@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
-import 'package:teleradiology/Screens%20Customer/Services/api_services.dart';
+import 'package:teleradiology/Constants/snackbar.dart';
+import 'package:teleradiology/Screens%20Customer/Services/custmer_api_service.dart';
 import 'package:teleradiology/Screens%20Customer/sign_in_page_customer.dart';
 
 class SignUpPageCustomer extends StatefulWidget {
@@ -59,12 +60,6 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                       child: TextFormField(
                         cursorColor: teleGray,
                         controller: userController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter name';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                             prefixIcon: selectedItem
                                 ? Icon(
@@ -103,14 +98,6 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                       child: TextFormField(
                         cursorColor: teleGray,
                         controller: phoneController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter number';
-                          } else if (value.length != 10) {
-                            return 'Number should be 10 digit';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                             prefixIcon: selectedItem
                                 ? Icon(
@@ -149,16 +136,6 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                       child: TextFormField(
                         cursorColor: teleGray,
                         controller: emailController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter email';
-                          } else if (!RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)) {
-                            return 'Email is not valid';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                             prefixIcon: selectedItem
                                 ? Icon(
@@ -198,18 +175,6 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                         cursorColor: teleGray,
                         obscureText: hidePassword1,
                         controller: passwordController,
-                        validator: (value) {
-                          RegExp passreg =
-                              RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter password';
-                          } else if (!passreg.hasMatch(value)) {
-                            return "Password contains at least one uppercase, one lowercase, one number and one special character";
-                          } else if (value.length < 8) {
-                            return "Password length minimum 8 characters";
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                             hintText: "Password",
                             hintStyle: TextStyle(
@@ -259,15 +224,6 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                         cursorColor: teleGray,
                         obscureText: hidePassword2,
                         controller: confirmPasswordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter confirm password';
-                          } else if (value.toString() !=
-                              passwordController.text) {
-                            return 'Password do not match';
-                          }
-                          return null;
-                        },
                         decoration: InputDecoration(
                             hintText: "Confirm Password",
                             hintStyle: TextStyle(
@@ -316,13 +272,52 @@ class _SignUpPageCustomerState extends State<SignUpPageCustomer> {
                       child: GestureDetector(
                         onTap: () {
                           if (formkey.currentState!.validate()) {
-                            print("valid");
                             var name = userController.text;
                             var email = emailController.text;
                             var password = passwordController.text;
                             var phone = phoneController.text;
-                            signup(name, email, phone, password)
-                                .whenComplete(() {});
+                            var confirm = confirmPasswordController.text;
+
+                            String pattern =
+                                r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                                r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                                r"{0,253}[a-zA-Z0-9])?)*$";
+                            RegExp passwordreg = RegExp(
+                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+                            RegExp emailvalidation = RegExp(pattern);
+                            if (name.isEmpty) {
+                              showCustomSnackBar('Enter Your Name');
+                            } else if (phone.isEmpty) {
+                              showCustomSnackBar('Enter Your Phone Number');
+                            } else if (phone.length != 10) {
+                              showCustomSnackBar(
+                                  'Enter Your 10 digit phone number ');
+                            } else if (email.isEmpty) {
+                              showCustomSnackBar('Enter Your Email');
+                            } else if (!emailvalidation.hasMatch(email)) {
+                              showCustomSnackBar('Enter a valid email address');
+                            } else if (password.isEmpty) {
+                              showCustomSnackBar('Enter Your Password');
+                            } else if (!passwordreg.hasMatch(password)) {
+                              showCustomSnackBar(
+                                  'Password must be at least 8 characters, one upper, lower, digit, special character');
+                            } else if (confirm.isEmpty) {
+                              showCustomSnackBar('Enter Confirm Password');
+                            } else if (password != confirm) {
+                              showCustomSnackBar('Password do not match');
+                            } else {
+                              Map data = {
+                                "name": name,
+                                "email": email,
+                                "phone": phone,
+                                "password": password,
+                                "confirm_password": confirm,
+                                "user_type": 3
+                              };
+
+                              signup(data).whenComplete(() {});
+                            }
                           }
                         },
                         child: Container(

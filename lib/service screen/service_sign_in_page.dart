@@ -29,11 +29,11 @@ class _ServiceSignInPageState extends State<ServiceSignInPage> {
                   height: ScaleController.H * 0.1,
                 ),
                 Container(
-                    height: ScaleController.H * 0.08,
+                    height: ScaleController.H * 0.04,
                     width: ScaleController.W * 0.4,
                     child: Image.asset(
                       "assets/Images/essential.png",
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     )),
                 SizedBox(
                   height: ScaleController.H * 0.02,

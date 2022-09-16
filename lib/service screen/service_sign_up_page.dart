@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:get/get.dart';
+import 'package:teleradiology/Constants/snackbar.dart';
 import 'package:teleradiology/service%20screen/service_forgot_password.dart';
 import 'service_sign_in_page.dart';
+import 'services/api_service_provider.dart';
 
 class ServiceSignUpPage extends StatefulWidget {
   const ServiceSignUpPage({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool hidePassword1 = true;
   bool hidePassword2 = true;
   bool selectedItem = true;
@@ -28,18 +30,20 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
       child: Scaffold(
           backgroundColor: backgroundBlue,
           body: SingleChildScrollView(
-            child: Center(
+            child: Form(
+              key: formkey,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: ScaleController.H * 0.1,
+                    height: ScaleController.H * 0.06,
                   ),
                   Container(
-                      height: ScaleController.H * 0.08,
+                      height: ScaleController.H * 0.04,
                       width: ScaleController.W * 0.4,
                       child: Image.asset(
                         "assets/Images/essential.png",
-                        fit: BoxFit.fill,
+                        fit: BoxFit.contain,
                       )),
                   SizedBox(
                     height: ScaleController.H * 0.02,
@@ -64,8 +68,7 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
                                   Icons.person,
                                   color: teleBlack,
                                 ),
-                          hintText:
-                              "Service Provider/Hospital/Health System/OP Facility",
+                          hintText: "Username",
                           hintStyle: TextStyle(
                               fontSize: 13,
                               color: teleGray,
@@ -261,7 +264,54 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
                         right: ScaleController.W * 0.05),
                     child: InkWell(
                       onTap: () {
-                        Get.to(ServiceForgotPassword());
+                        if (formkey.currentState!.validate()) {
+                          var name = userController.text;
+                          var email = emailController.text;
+                          var password = passwordController.text;
+                          var phone = phoneController.text;
+                          var confirm = confirmPasswordController.text;
+
+                          String pattern =
+                              r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                              r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                              r"{0,253}[a-zA-Z0-9])?)*$";
+                          RegExp passwordreg = RegExp(
+                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+                          RegExp emailvalidation = RegExp(pattern);
+                          if (name.isEmpty) {
+                            showCustomSnackBar('Enter Your Name');
+                          } else if (phone.isEmpty) {
+                            showCustomSnackBar('Enter Your Phone Number');
+                          } else if (phone.length != 10) {
+                            showCustomSnackBar(
+                                'Enter Your 10 digit phone number ');
+                          } else if (email.isEmpty) {
+                            showCustomSnackBar('Enter Your Email');
+                          } else if (!emailvalidation.hasMatch(email)) {
+                            showCustomSnackBar('Enter a valid email address');
+                          } else if (password.isEmpty) {
+                            showCustomSnackBar('Enter Your Password');
+                          } else if (!passwordreg.hasMatch(password)) {
+                            showCustomSnackBar(
+                                'Password must be at least 8 characters, one upper, lower, digit, special character');
+                          } else if (confirm.isEmpty) {
+                            showCustomSnackBar('Enter Confirm Password');
+                          } else if (password != confirm) {
+                            showCustomSnackBar('Password do not match');
+                          } else {
+                            Map data = {
+                              "name": name,
+                              "email": email,
+                              "phone": phone,
+                              "password": password,
+                              "confirm_password": confirm,
+                              "user_type": 4
+                            };
+
+                            signup(data).whenComplete(() {});
+                          }
+                        }
                       },
                       child: Container(
                         height: ScaleController.H * 0.08,

@@ -38,7 +38,6 @@ class _NavigationPageState extends State<NavigationPage> {
             InkWell(
                 onTap: () async {
                   await setIscustomer(true);
-
                   Get.to(SignInPageCustomer());
                 },
                 child: Column(
