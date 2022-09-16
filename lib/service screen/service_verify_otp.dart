@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_field_style.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
 import 'package:teleradiology/Constants/servicecolors.dart';
+import 'package:teleradiology/Constants/snackbar.dart';
+import 'package:teleradiology/service%20screen/services/api_service_provider.dart';
 
 import 'service_reset_password.dart';
 
 class ServiceVerifyOTP extends StatefulWidget {
-  const ServiceVerifyOTP({Key? key}) : super(key: key);
+  final bool isForgot;
+  const ServiceVerifyOTP({Key? key, this.isForgot = false}) : super(key: key);
 
   @override
   State<ServiceVerifyOTP> createState() => _ServiceVerifyOTPState();
 }
 
 class _ServiceVerifyOTPState extends State<ServiceVerifyOTP> {
+  OtpFieldController otpFieldController = OtpFieldController();
+  String otp = "";
+
   @override
   Widget build(BuildContext context) {
     var H = MediaQuery.of(context).size.height;
     var W = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: bg,
       appBar: AppBar(
@@ -60,14 +71,44 @@ class _ServiceVerifyOTPState extends State<ServiceVerifyOTP> {
             SizedBox(
               height: H * 0.07,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildTextFormOTP(W, H),
-                buildTextFormOTP(W, H),
-                buildTextFormOTP(W, H),
-                buildTextFormOTP(W, H),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                padding: EdgeInsets.all(Get.width * 0.04),
+                decoration: BoxDecoration(
+                  // color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Column(children: [
+                  OTPTextField(
+                      controller: otpFieldController,
+                      length: 4,
+                      width: MediaQuery.of(context).size.width,
+                      textFieldAlignment: MainAxisAlignment.spaceAround,
+                      fieldWidth: Get.width * 0.16,
+                      fieldStyle: FieldStyle.box,
+                      outlineBorderRadius: 15,
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: textcolor,
+                          fontWeight: FontWeight.bold),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: Get.width * 0.06,
+                          vertical: Get.width * 0.04),
+                      otpFieldStyle: OtpFieldStyle(
+                        borderColor: textcolor,
+                        focusBorderColor: textcolor,
+                        enabledBorderColor: Color(0xff212121),
+                        disabledBorderColor: Colors.black38,
+                      ),
+                      onChanged: (pin) {},
+                      onCompleted: (pin) {
+                        setState(() {
+                          otp = pin;
+                        });
+                      }),
+                ]),
+              ),
             ),
             SizedBox(
               height: H * 0.05,
@@ -78,7 +119,16 @@ class _ServiceVerifyOTPState extends State<ServiceVerifyOTP> {
                   right: ScaleController.W * 0.05),
               child: InkWell(
                 onTap: () {
-                  Get.to(ServiceResetPassword());
+                  if (otp.length != 4) {
+                    showCustomSnackBar("Fill the OTP fields");
+                  } else {
+                    int otptext = int.parse(otp);
+                    EasyLoading.show();
+                    serviceOtp(otptext).whenComplete(() {
+                      EasyLoading.removeAllCallbacks();
+                      EasyLoading.dismiss();
+                    });
+                  }
                 },
                 child: Container(
                   height: ScaleController.H * 0.08,
@@ -109,38 +159,5 @@ class _ServiceVerifyOTPState extends State<ServiceVerifyOTP> {
         )),
       ),
     );
-  }
-
-  Container buildTextFormOTP(double W, double H) {
-    return Container(
-        width: W * 0.20,
-        height: H * 0.07,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.transparent, width: 0.5),
-        ),
-        child: Center(
-          child: TextFormField(
-            onChanged: (value) {
-              if (value.length == 1) {
-                FocusScope.of(context).nextFocus();
-              }
-            },
-            textAlign: TextAlign.center,
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(1),
-              FilteringTextInputFormatter.digitsOnly
-            ],
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: telePurple2),
-                    borderRadius: BorderRadius.all(Radius.circular(32))),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.all(Radius.circular(32)))),
-          ),
-        ));
   }
 }

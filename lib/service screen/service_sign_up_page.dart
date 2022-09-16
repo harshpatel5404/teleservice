@@ -275,58 +275,54 @@ class _ServiceSignUpPageState extends State<ServiceSignUpPage> {
                         right: ScaleController.W * 0.05),
                     child: InkWell(
                       onTap: () {
-                        EasyLoading.show();
+                        var name = userController.text;
+                        var email = emailController.text;
+                        var password = passwordController.text;
+                        var phone = phoneController.text;
+                        var confirm = confirmPasswordController.text;
 
-                        if (formkey.currentState!.validate()) {
-                          var name = userController.text;
-                          var email = emailController.text;
-                          var password = passwordController.text;
-                          var phone = phoneController.text;
-                          var confirm = confirmPasswordController.text;
+                        String pattern =
+                            r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                            r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+                            r"{0,253}[a-zA-Z0-9])?)*$";
+                        RegExp passwordreg = RegExp(
+                            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
-                          String pattern =
-                              r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                              r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                              r"{0,253}[a-zA-Z0-9])?)*$";
-                          RegExp passwordreg = RegExp(
-                              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-
-                          RegExp emailvalidation = RegExp(pattern);
-                          if (name.isEmpty) {
-                            showCustomSnackBar('Enter Your Name');
-                          } else if (phone.isEmpty) {
-                            showCustomSnackBar('Enter Your Phone Number');
-                          } else if (phone.length != 10) {
-                            showCustomSnackBar(
-                                'Enter Your 10 digit phone number ');
-                          } else if (email.isEmpty) {
-                            showCustomSnackBar('Enter Your Email');
-                          } else if (!emailvalidation.hasMatch(email)) {
-                            showCustomSnackBar('Enter a valid email address');
-                          } else if (password.isEmpty) {
-                            showCustomSnackBar('Enter Your Password');
-                          } else if (!passwordreg.hasMatch(password)) {
-                            showCustomSnackBar(
-                                'Password must be at least 8 characters, one upper, lower, digit, special character');
-                          } else if (confirm.isEmpty) {
-                            showCustomSnackBar('Enter Confirm Password');
-                          } else if (password != confirm) {
-                            showCustomSnackBar('Password do not match');
-                          } else {
-                            Map data = {
-                              "name": name,
-                              "email": email,
-                              "phone": phone,
-                              "password": password,
-                              "confirm_password": confirm,
-                              "user_type": 4
-                            };
-                            EasyLoading.show();
-                            signup(data).whenComplete(() {
-                              EasyLoading.removeAllCallbacks();
-                              EasyLoading.dismiss();
-                            });
-                          }
+                        RegExp emailvalidation = RegExp(pattern);
+                        if (name.isEmpty) {
+                          showCustomSnackBar('Enter Your Name');
+                        } else if (phone.isEmpty) {
+                          showCustomSnackBar('Enter Your Phone Number');
+                        } else if (phone.length != 10) {
+                          showCustomSnackBar(
+                              'Enter Your 10 digit phone number ');
+                        } else if (email.isEmpty) {
+                          showCustomSnackBar('Enter Your Email');
+                        } else if (!emailvalidation.hasMatch(email)) {
+                          showCustomSnackBar('Enter a valid email address');
+                        } else if (password.isEmpty) {
+                          showCustomSnackBar('Enter Your Password');
+                        } else if (!passwordreg.hasMatch(password)) {
+                          showCustomSnackBar(
+                              'Password must be at least 8 characters, one upper, lower, digit, special character');
+                        } else if (confirm.isEmpty) {
+                          showCustomSnackBar('Enter Confirm Password');
+                        } else if (password != confirm) {
+                          showCustomSnackBar('Password do not match');
+                        } else {
+                          Map data = {
+                            "name": name,
+                            "email": email,
+                            "phone": phone,
+                            "password": password,
+                            "confirm_password": confirm,
+                            "user_type": 4
+                          };
+                          EasyLoading.show();
+                          servicesignup(data).whenComplete(() {
+                            EasyLoading.removeAllCallbacks();
+                            EasyLoading.dismiss();
+                          });
                         }
                       },
                       child: Container(

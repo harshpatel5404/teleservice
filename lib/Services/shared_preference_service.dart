@@ -72,3 +72,8 @@ Future<void> setUserinfo({name, email, phone}) async {
   await prefs.setString('phone', phone ?? "");
 }
 
+Future<String?> getEmail() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('email');
+}
+

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:teleradiology/Constants/colors_customer.dart';
 import 'package:teleradiology/Constants/dimensions.dart';
+import 'package:teleradiology/Constants/snackbar.dart';
 import 'package:teleradiology/service%20screen/service_verify_otp.dart';
+
+import 'services/api_service_provider.dart';
 
 class ServiceForgotPassword extends StatefulWidget {
   const ServiceForgotPassword({Key? key}) : super(key: key);
@@ -96,7 +100,16 @@ class _ServiceForgotPasswordState extends State<ServiceForgotPassword> {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(ServiceVerifyOTP());
+                      if (emailController.text == "") {
+                        showCustomSnackBar('Enter Your Email');
+                      } else {
+                        EasyLoading.show();
+                        serviceForgotSendEmail(emailController.text)
+                            .whenComplete(() {
+                          EasyLoading.removeAllCallbacks();
+                          EasyLoading.dismiss();
+                        });
+                      }
                     },
                     child: Padding(
                       padding: EdgeInsets.only(

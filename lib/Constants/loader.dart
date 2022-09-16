@@ -16,6 +16,6 @@ void configLoading() {
     ..dismissOnTap = false
     ..indicatorColor = Colors.white
     ..textColor = Colors.black
-    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..maskColor = teleBlue
     ..userInteractions = false;
 }
